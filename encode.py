@@ -169,14 +169,14 @@ class Sheet:
         self.d = ImageDraw.Draw(self.img)
         self.svg = []
 
-    def star(self, p, big, solid=False):
-        """A four-point star; `solid` fills it in (the end star of a digit)."""
+    def star(self, p, big, hollow=False):
+        """A four-point star, filled white; `hollow` leaves it empty inside (the end star of a digit)."""
         rx, ry, w = (BIG_RX, BIG_RY, 3) if big else (SMALL_RX, SMALL_RY, 2.5)
         pts = star_outline(p[0] * SS, p[1] * SS, rx * SS, ry * SS)
-        if solid:
+        if not hollow:
             self.d.polygon(pts, fill=INK)
         self.d.line(pts + [pts[0]], fill=INK, width=round(w * SS), joint="curve")
-        fill = f' fill="{rgb(INK)}"' if solid else ""
+        fill = "" if hollow else f' fill="{rgb(INK)}"'
         self.svg.append(f'<path d="{star_svg_path(p[0], p[1], rx, ry)}" stroke-width="{w}"{fill}/>')
 
     def line(self, a, b, width=LINE_W):
@@ -343,7 +343,7 @@ def letter_shape(a, b, ch, rng=None):
             guard = [p for slot, pts in slots.items() if (slot[1] == "a") == (side == 1) for p in pts]
             peak_shape(at, L, code[form], side, rng, lines, smalls, guard)
     smalls += [(at(*p), abs(p[1])) for pts in slots.values() for p in pts]
-    shape = {"lines": lines, "smalls": smalls, "solid_end": bool(code.get("solid"))}  # digits end in a solid star
+    shape = {"lines": lines, "smalls": smalls, "hollow_end": bool(code.get("hollow"))}  # digits end in a hollow star
     shape["samples"] = sample_shape(shape)
     return shape
 
@@ -558,9 +558,9 @@ def encode(text, out, seed=None, progress=False):
         bar.show(PLACE_SHARE + 0.1 * idx / len(placed), f"drawing word {idx + 1}/{len(placed)}")
         for shape in shapes:
             draw_shape(sheet, shape)
-        solid = [False] + [shape["solid_end"] for shape in shapes]
-        for p, is_solid in zip(nodes, solid):
-            sheet.star(p, big=True, solid=is_solid)
+        hollow = [False] + [shape["hollow_end"] for shape in shapes]
+        for p, is_hollow in zip(nodes, hollow):
+            sheet.star(p, big=True, hollow=is_hollow)
         sheet.label(label, roman(idx + 1))
     bar.show(0.95, "saving")
     sheet.save(out, pad=70)

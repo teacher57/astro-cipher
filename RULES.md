@@ -19,11 +19,12 @@
   - `veeN`: the same shape hanging below the line
   - `double`: the line is drawn twice, side by side
   - `cross`: the line is crossed by a `//` mark in the middle
-  - `solid`: the line's second star is filled in (only digits use it)
+  - `hollow`: the line's second star is left empty inside (only digits use it)
 - A plain line with no small stars is **О / O**.
 - Russian and English **look-alikes share one picture**: А=A, В=B, С=C, Е=E, Н=H, К=K, М=M, О=O, Р=P, Т=T, Х=X, У=Y.
   The decoder picks the alphabet from the other letters in the word (or else from the whole sentence).
-- **Digits** end in a **solid** (filled-in) star, so they can never be mistaken for letters even when
+- Every star is **filled white**, except a digit's second star, which is **hollow** (dark inside), so
+  digits can never be mistaken for letters even when
   the shape matches one. `0` = bare line, `1`-`3` = roof of 1-3 stars above, `4`-`6` = vee of 1-3
   stars below, `7`-`9` = roof of 1-3 stars above on a double line.
 - `Ё` is written as `Е`. Every other character (punctuation, dashes, emoji, ...) counts as a space between words.
@@ -102,16 +103,16 @@ See `alphabet/key_sheet.jpg` for all symbols, and `alphabet/{ru,en,digits}/` for
 
 | Symbol | Small stars | Same picture as |
 |---|---|---|
-| 0 | solid |  |
-| 1 | roof1 solid |  |
-| 2 | roof2 solid |  |
-| 3 | roof3 solid |  |
-| 4 | vee1 solid |  |
-| 5 | vee2 solid |  |
-| 6 | vee3 solid |  |
-| 7 | roof1 double solid |  |
-| 8 | roof2 double solid |  |
-| 9 | roof3 double solid |  |
+| 0 | hollow |  |
+| 1 | roof1 hollow |  |
+| 2 | roof2 hollow |  |
+| 3 | roof3 hollow |  |
+| 4 | vee1 hollow |  |
+| 5 | vee2 hollow |  |
+| 6 | vee3 hollow |  |
+| 7 | roof1 double hollow |  |
+| 8 | roof2 double hollow |  |
+| 9 | roof3 double hollow |  |
 
 ## Usage
 

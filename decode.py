@@ -4,7 +4,7 @@
 
 Reads the picture itself: finds big stars, small stars, lines and the Roman word numbers,
 walks each word from the star its number sits next to, and reads every line's slots
-and forms (roof / vee top stars, double line, "//" cross mark, solid end star = digit).
+and forms (roof / vee top stars, double line, "//" cross mark, hollow end star = digit).
 """
 import argparse
 import io
@@ -118,8 +118,8 @@ def decode(path, verbose=False):
     comps = components(gray)
     by = {k: [c for c in comps if c["kind"] == k] for k in ("line", "big", "small", "other")}
     stars = [(c["cx"], c["cy"]) for c in by["big"]]
-    # a digit's end star is filled in: its center is ink, an ordinary star's center is empty sky
-    solid = [c["mask"][c["h"] // 2 - 2:c["h"] // 2 + 3, c["w"] // 2 - 2:c["w"] // 2 + 3].mean() > 0.5 for c in by["big"]]
+    # every star is filled except a digit's end star: its center is empty sky
+    hollow = [c["mask"][c["h"] // 2 - 2:c["h"] // 2 + 3, c["w"] // 2 - 2:c["w"] // 2 + 3].mean() < 0.5 for c in by["big"]]
 
     def nearest_star(p, limit):
         if not stars:
@@ -180,8 +180,8 @@ def decode(path, verbose=False):
             counts["double"] = 1
         if any(ln["cross"] for ln in lines):
             counts["cross"] = 1
-        if solid[b]:  # the star we walk *to* is solid: this line is a digit
-            counts["solid"] = 1
+        if hollow[b]:  # the star we walk *to* is hollow: this line is a digit
+            counts["hollow"] = 1
         return counts
 
     # word numbers: Roman-numeral marks, grouped left to right on one baseline

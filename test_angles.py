@@ -33,7 +33,7 @@ def main():
                 sheet = en.Sheet(1300, 1300)
                 en.draw_letter(sheet, a, b, ch, rng)
                 sheet.star(a, big=True)
-                sheet.star(b, big=True, solid=bool(code.get("solid")))
+                sheet.star(b, big=True, hollow=bool(code.get("hollow")))
                 lw, lh = en.label_size("I")
                 d = en.LABEL_GAP + abs(math.cos(r)) * lw / 2 + abs(math.sin(r)) * lh / 2
                 sheet.label((a[0] - d * math.cos(r), a[1] - d * math.sin(r)), "I")

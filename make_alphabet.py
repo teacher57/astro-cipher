@@ -46,7 +46,7 @@ def draw_cell(sheet, x, y, ch, twins=True):
     b = (a[0] + en.key_edge(ch), a[1])
     en.draw_letter(sheet, a, b, ch)
     sheet.star(a, big=True)
-    sheet.star(b, big=True, solid=bool(ab.CODES[ch].get("solid")))
+    sheet.star(b, big=True, hollow=bool(ab.CODES[ch].get("hollow")))
 
 
 def key_sheet(sections, path, twins=True):
@@ -100,12 +100,13 @@ def main():
         "  - `veeN`: the same shape hanging below the line",
         "  - `double`: the line is drawn twice, side by side",
         "  - `cross`: the line is crossed by a `//` mark in the middle",
-        "  - `solid`: the line's second star is filled in (only digits use it)",
+        "  - `hollow`: the line's second star is left empty inside (only digits use it)",
         "- A plain line with no small stars is **О / O**.",
         "- Russian and English **look-alikes share one picture**: " +
         ", ".join(f"{r}={e}" for e, r in ab.EN_SHARED.items()) + ".",
         "  The decoder picks the alphabet from the other letters in the word (or else from the whole sentence).",
-        "- **Digits** end in a **solid** (filled-in) star, so they can never be mistaken for letters even when",
+        "- Every star is **filled white**, except a digit's second star, which is **hollow** (dark inside), so",
+        "  digits can never be mistaken for letters even when",
         "  the shape matches one. `0` = bare line, `1`-`3` = roof of 1-3 stars above, `4`-`6` = vee of 1-3",
         "  stars below, `7`-`9` = roof of 1-3 stars above on a double line.",
         "- `Ё` is written as `Е`. Every other character (punctuation, dashes, emoji, ...) counts as a space between words.",

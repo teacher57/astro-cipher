@@ -16,11 +16,11 @@ Complex forms on top of the slots:
     veeN    the same shape hanging below the line
     double  the line is drawn twice, side by side
     cross   the line is crossed by a "//" mark in the middle
-    solid   the line's second (end) star is filled in: this marks a digit
+    hollow  the line's second (end) star is left empty (every other star is filled): this marks a digit
 """
 
 SLOTS = ("Sa", "Ma", "Ea", "Sb", "Mb", "Eb")
-FORMS = ("roof", "vee", "double", "cross", "solid")
+FORMS = ("roof", "vee", "double", "cross", "hollow")
 FEATURES = SLOTS + FORMS
 
 # slots a form would collide with when drawn
@@ -84,12 +84,12 @@ EN_OWN = {
     "Z": "cross Sa1 Eb1",
 }
 
-# Digits: the line ends in a solid star. 0 = bare line, 1-3 = roof of 1-3 stars above,
+# Digits: the line ends in a hollow star. 0 = bare line, 1-3 = roof of 1-3 stars above,
 # 4-6 = vee of 1-3 stars below, 7-9 = roof of 1-3 stars above on a double line.
 DIGITS = {
-    "0": "solid", "1": "solid roof1", "2": "solid roof2", "3": "solid roof3",
-    "4": "solid vee1", "5": "solid vee2", "6": "solid vee3",
-    "7": "solid double roof1", "8": "solid double roof2", "9": "solid double roof3",
+    "0": "hollow", "1": "hollow roof1", "2": "hollow roof2", "3": "hollow roof3",
+    "4": "hollow vee1", "5": "hollow vee2", "6": "hollow vee3",
+    "7": "hollow double roof1", "8": "hollow double roof2", "9": "hollow double roof3",
 }
 
 NORMALIZE = {"Ё": "Е"}
@@ -116,7 +116,7 @@ def key(counts):
 
 
 def fmt(counts):
-    return " ".join(f if f in ("double", "cross", "solid") else f"{f}{counts[f]}" for f in FORMS + SLOTS if counts.get(f))
+    return " ".join(f if f in ("double", "cross", "hollow") else f"{f}{counts[f]}" for f in FORMS + SLOTS if counts.get(f))
 
 
 def _build():
