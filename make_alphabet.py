@@ -28,22 +28,42 @@ def cell_w(chars):
     return 170 + max(en.key_edge(ch) for ch in chars) + 70
 
 
-def caption(ch):
-    """'А = A' for look-alikes, else just the symbol."""
+def caption(ch, twins=True):
+    """'А = A' for look-alikes (unless `twins` is off), else just the symbol."""
+    if not twins:
+        return ch
     if ch in ab.EN_SHARED:
         return f"{ch} = {ab.EN_SHARED[ch]}"
     twin = next((e for e, r in ab.EN_SHARED.items() if r == ch), None)
     return f"{ch} = {twin}" if twin else ch
 
 
-def draw_cell(sheet, x, y, ch):
+def draw_cell(sheet, x, y, ch, twins=True):
     mid = y + cell_h([ch]) / 2
-    sheet.text((x + 75, mid), caption(ch), 34 if len(caption(ch)) > 1 else 54)
+    text = caption(ch, twins)
+    sheet.text((x + 75, mid), text, 34 if len(text) > 1 else 54)
     a = (x + 170, mid)
     b = (a[0] + en.key_edge(ch), a[1])
     en.draw_letter(sheet, a, b, ch)
     sheet.star(a, big=True)
     sheet.star(b, big=True, solid=bool(ab.CODES[ch].get("solid")))
+
+
+def key_sheet(sections, path, twins=True):
+    """All symbols of `sections` on one picture, a titled block per section."""
+    head = 80
+    width = max(cell_w(chars) * cols for _, _, chars, cols in sections)
+    height = sum(-(-len(chars) // cols) * cell_h(chars) for _, _, chars, cols in sections)
+    sheet = en.Sheet(width, height + head * len(sections) + 40)
+    y = 20
+    for _, title, chars, cols in sections:
+        sheet.text((width / 2, y + head / 2), title, 44)
+        y += head
+        cw, ch_ = cell_w(chars), cell_h(chars)
+        for i, ch in enumerate(chars):
+            draw_cell(sheet, (i % cols) * cw, y + (i // cols) * ch_, ch, twins)
+        y += -(-len(chars) // cols) * ch_
+    sheet.save(path)
 
 
 def main():
@@ -54,19 +74,9 @@ def main():
             name = f"{ch}.jpg" if folder == "digits" else f"{i:02d}_{ch}.jpg"
             sheet.save(HERE / "alphabet" / folder / name)
 
-    head = 80
-    width = max(cell_w(chars) * cols for _, _, chars, cols in SECTIONS)
-    height = sum(-(-len(chars) // cols) * cell_h(chars) for _, _, chars, cols in SECTIONS)
-    sheet = en.Sheet(width, height + head * len(SECTIONS) + 40)
-    y = 20
-    for _, title, chars, cols in SECTIONS:
-        sheet.text((width / 2, y + head / 2), title, 44)
-        y += head
-        cw, ch_ = cell_w(chars), cell_h(chars)
-        for i, ch in enumerate(chars):
-            draw_cell(sheet, (i % cols) * cw, y + (i // cols) * ch_, ch)
-        y += -(-len(chars) // cols) * ch_
-    sheet.save(HERE / "alphabet" / "key_sheet.jpg")
+    key_sheet(SECTIONS, HERE / "alphabet" / "key_sheet.jpg")
+    # English letters only, plain captions (no Cyrillic twins): the one shown in the README
+    key_sheet([sec for sec in SECTIONS if sec[0] == "en"], HERE / "alphabet" / "key_sheet_en.jpg", twins=False)
 
     lines = [
         "# Astro cipher rules",

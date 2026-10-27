@@ -17,9 +17,9 @@ EXAMPLES = [
     ("hello_world", "hello world", 1),
     ("look_up_tonight", "look up tonight", 2),
     ("the_stars_keep_our_secrets", "the stars keep our secrets", 3),
-    ("meet_me_at_the_old_oak_at_9", "meet me at the old oak at 9", 4),
-    ("i_invented_a_cipher_in_2026", "i invented a cipher in 2026", 5),
-    ("orion_rises_at_10_pm", "Orion rises at 10 PM, bring a blanket!", 6),
+    ("meet_me_at_the_old_oak_at_dawn", "meet me at the old oak at dawn", 4),
+    ("i_invented_a_cipher", "i invented a cipher", 5),
+    ("orion_rises_late_tonight", "Orion rises late tonight, bring a blanket!", 6),
 ]
 
 

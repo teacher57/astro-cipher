@@ -4,15 +4,12 @@ Hide text in a picture of the night sky. Every letter is a line between two big 
 roofs and other little marks around the line tell the letters apart. Words are chains of stars, numbered
 with Roman numerals. To anyone without the key, it's just a constellation.
 
-![key sheet](alphabet/key_sheet.jpg)
+![English key sheet](alphabet/key_sheet_en.jpg)
 
-- **Russian, English and digits.** Russian and English look-alikes (А/A, В/B, Е/E, ...) share one picture.
-- **Digits** end in a solid star: `0` = bare line, `1`-`3` = roof of 1-3 stars above, `4`-`6` = 1-3 below,
-  `7`-`9` = roof above on a double line.
 - **Every picture is different:** line lengths, turns, roof heights and spacing are random; `--seed` repeats one.
 - **Decoder reads the pixels** of a JPG, PNG or SVG made by the encoder: it finds the stars, lines and
   numerals and walks each word from its numbered star.
-- Anything that isn't a letter or digit counts as a space.
+- Punctuation counts as a space.
 
 The full rules, with a table for every symbol, are in [RULES.md](RULES.md).
 
@@ -20,7 +17,7 @@ The full rules, with a table for every symbol, are in [RULES.md](RULES.md).
 
 ![hello world](examples/hello_world.jpg)
 
-Six English messages with their text, from "hello world" to one with digits and punctuation, are in
+Six English messages with their text, from "hello world" to one with punctuation, are in
 [examples/](examples/README.md). Try reading one with the key sheet before you look at the answer.
 
 ## Usage
@@ -48,7 +45,7 @@ The fonts used for numerals and the key sheet are macOS system fonts (Times New 
 | `cli.py`, `astrocipher` | the `astrocipher` command |
 | `make_alphabet.py` | renders `alphabet/` (one picture per symbol, key sheet) and `RULES.md` |
 | `make_examples.py`, `examples/` | example pictures with their text, rebuilt and checked by the script |
-| `ideas/` | design mock-ups explored for the digit symbols |
+| `ideas/` | design mock-ups explored for the cipher's symbols |
 
 ## Tests
 
