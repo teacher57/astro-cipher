@@ -16,6 +16,13 @@ with Roman numerals. To anyone without the key, it's just a constellation.
 
 The full rules, with a table for every symbol, are in [RULES.md](RULES.md).
 
+## Examples
+
+![hello world](examples/hello_world.jpg)
+
+Six English messages with their text, from "hello world" to one with digits and punctuation, are in
+[examples/](examples/README.md). Try reading one with the key sheet before you look at the answer.
+
 ## Usage
 
 ```bash
@@ -40,6 +47,7 @@ The fonts used for numerals and the key sheet are macOS system fonts (Times New 
 | `decode.py` | reads a picture back into text |
 | `cli.py`, `astrocipher` | the `astrocipher` command |
 | `make_alphabet.py` | renders `alphabet/` (one picture per symbol, key sheet) and `RULES.md` |
+| `make_examples.py`, `examples/` | example pictures with their text, rebuilt and checked by the script |
 | `ideas/` | design mock-ups explored for the digit symbols |
 
 ## Tests
