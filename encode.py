@@ -1,6 +1,6 @@
 """Encode text into an astro cipher constellation JPG.
 
-    python encode.py "Лагерь Маши" -o out/lager.jpg [--seed 7]
+    python encode.py "look up tonight" -o out/tonight.jpg [--seed 7]
 
 Each word is a chain of big stars; each line between two big stars is one letter.
 The first star of every word has the word's number written next to it in Roman numerals

@@ -1,11 +1,11 @@
 """astrocipher: hide text in a constellation picture, and read it back.
 
-    astrocipher encode "i invented a cipher"         -> writes <sha256 of the picture>.jpg here
-    astrocipher encode "Лагерь Маши" --svg            -> <sha256>.svg (vector image)
-    astrocipher encode "Лагерь Маши" -o pics/         -> <sha256>.jpg inside pics/
-    astrocipher encode "Лагерь Маши" -o lager.jpg     -> exactly that name (.jpg or .svg)
-    astrocipher decode 3f9a...c1.jpg [-v]             (JPG, SVG or PNG)
-    astrocipher alphabet                              -> re-renders alphabet/ and RULES.md
+    astrocipher encode "i invented a cipher"             -> writes <sha256 of the picture>.jpg here
+    astrocipher encode "look up tonight" --svg           -> <sha256>.svg (vector image)
+    astrocipher encode "look up tonight" -o pics/        -> <sha256>.jpg inside pics/
+    astrocipher encode "look up tonight" -o tonight.jpg  -> exactly that name (.jpg or .svg)
+    astrocipher decode 3f9a...c1.jpg [-v]                (JPG, SVG or PNG)
+    astrocipher alphabet                                 -> re-renders alphabet/ and RULES.md
 """
 import argparse
 import hashlib

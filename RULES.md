@@ -116,12 +116,12 @@ See `alphabet/key_sheet.jpg` for all symbols, and `alphabet/{ru,en,digits}/` for
 ## Usage
 
 ```bash
-astrocipher encode "i invented a cipher"        # -> <sha256 of the picture>.jpg here
-astrocipher encode "Лагерь Маши" --svg          # -> <sha256>.svg (vector image)
-astrocipher encode "Лагерь Маши" -o pics/        # -> pics/<sha256>.jpg
-astrocipher encode "Лагерь Маши" -o lager.jpg    # -> exactly lager.jpg (or .svg)
-astrocipher decode <sha256>.jpg -v                  # reads .jpg, .svg or .png
-astrocipher alphabet      # re-render alphabet/ and this file after editing alphabet.py
+astrocipher encode "i invented a cipher"             # -> <sha256 of the picture>.jpg here
+astrocipher encode "look up tonight" --svg           # -> <sha256>.svg (vector image)
+astrocipher encode "look up tonight" -o pics/        # -> pics/<sha256>.jpg
+astrocipher encode "look up tonight" -o tonight.jpg  # -> exactly tonight.jpg (or .svg)
+astrocipher decode <sha256>.jpg -v                   # reads .jpg, .svg or .png
+astrocipher alphabet                                 # re-render alphabet/ and this file after editing alphabet.py
 ```
 
 Pictures are named by the SHA-256 of their own bytes, so a file name never gives the message away.

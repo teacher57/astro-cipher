@@ -1,6 +1,6 @@
 """Decode an astro cipher JPG (made by encode.py) back into text.
 
-    python decode.py out/lager.svg [-v]     (SVG, JPG or PNG)
+    python decode.py out/tonight.svg [-v]     (SVG, JPG or PNG)
 
 Reads the picture itself: finds big stars, small stars, lines and the Roman word numbers,
 walks each word from the star its number sits next to, and reads every line's slots

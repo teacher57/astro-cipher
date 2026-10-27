@@ -28,11 +28,11 @@ Six English messages with their text, from "hello world" to one with digits and 
 ```bash
 pip install -r requirements.txt
 
-./astrocipher encode "i invented a cipher"       # -> <sha256 of the picture>.jpg, with a progress bar
-./astrocipher encode "Лагерь Маши" --svg         # -> <sha256>.svg (vector image)
-./astrocipher encode "Лагерь Маши" -o lager.jpg  # -> exactly that file name
-./astrocipher decode lager.jpg -v                # prints the text; -v shows what was read per letter
-./astrocipher alphabet                           # re-renders alphabet/ and RULES.md after editing alphabet.py
+./astrocipher encode "i invented a cipher"             # -> <sha256 of the picture>.jpg, with a progress bar
+./astrocipher encode "look up tonight" --svg           # -> <sha256>.svg (vector image)
+./astrocipher encode "look up tonight" -o tonight.jpg  # -> exactly that file name
+./astrocipher decode tonight.jpg -v                    # prints the text; -v shows what was read per letter
+./astrocipher alphabet                                 # re-renders alphabet/ and RULES.md after editing alphabet.py
 ```
 
 Files are named by the SHA-256 of their own bytes, so a file name never gives the message away.
